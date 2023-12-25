@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Load the Paper.js library -->
+    <script type="text/javascript" src="paper.js"></script>
+    <!-- Load external PaperScript and associate it with myCanvas -->
+    <script type="text/paperscript" src="render.js" canvas="myCanvas"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        var paperscript = {};
+        function handleFiles() {
+            file = document.getElementById('input').files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                paperscript.render_armcode(reader.result);
+            }, false);
+            if (file) {
+                reader.readAsText(file);
+            }
+        }
+        window.onload = () => {
+            document.getElementById('input').addEventListener('change', handleFiles);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="file" id="input">
+    </div>
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
